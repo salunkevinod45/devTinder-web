@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import Body from "./Body";
-import Login from "./Login";
-import Profile from "./Profile";
+import Body from "./components/Body";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import {appStore} from "./utils/store";
+import { Provider } from "react-redux";
+import Feed from "./components/Feed";
 
 function App() {
   const router = createBrowserRouter([
@@ -10,6 +13,7 @@ function App() {
       path: "/",
       Component: Body,
       children:[
+        {path:'/',Component:Feed},
         {path:"/login",Component:Login},
         {path:"/profile",Component:Profile}
       ]
@@ -19,7 +23,10 @@ function App() {
     <>
       {/* <Navbar />
       <div className="mx-2 mt-2"> Hello world</div> */}
-      <RouterProvider router={router} />
+          <Provider store={appStore}>
+            <RouterProvider router={router} />
+          </Provider>
+
     </>
   );
 }
