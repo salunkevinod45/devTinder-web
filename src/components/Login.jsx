@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
+  const user = useSelector((state)=> state.user);
+  console.log(user)
   const dispatch = useDispatch();
   const [email, setEmailId] = useState("vinod@gmail.com");
   const [password, setPassword] = useState("Vinod@123");
@@ -21,13 +23,20 @@ const Login = () => {
         { withCredentials: true },
       );
 
-      console.log(loggedInUser.data.data);
+      // console.log(loggedInUser.data.data);
       dispatch(addUser(loggedInUser.data.data));
       navigate("/");
     } catch (err) {
       console.log(err);
     }
   };
+useEffect(() => {
+  if (user && user?.user?._id) {
+    console.log('Navigating because user exists', user);
+    navigate('/');
+  }
+}, [user]);
+
   return (
     <div className="grid justify-items-center mt-2">
       <div className="card card-border bg-base-100 w-96 grid justify-items-center">

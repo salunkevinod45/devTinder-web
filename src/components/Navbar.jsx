@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  console.log(user)
   return (
     <div>
       <div className="navbar bg-base-300 shadow-sm">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">
+          <Link to={user.user ?"/":"/login"} className="btn btn-ghost text-xl" >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -24,7 +24,7 @@ const Navbar = () => {
               />
             </svg>
             DevTinder 
-          </a>
+          </Link>
         </div>
         <div className="flex-none">
           {user.user && (
@@ -49,10 +49,10 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
+                  <Link to={"/profile"} className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a>Settings</a>
