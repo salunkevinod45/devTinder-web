@@ -11,6 +11,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmailId] = useState("vinod@gmail.com");
   const [password, setPassword] = useState("Vinod@123");
+  const [error,setError] = useState('');
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
@@ -22,12 +23,10 @@ const Login = () => {
         },
         { withCredentials: true },
       );
-
-      // console.log(loggedInUser.data.data);
       dispatch(addUser(loggedInUser.data.data));
       navigate("/");
     } catch (err) {
-      console.log(err);
+      setError(err?.response?.data);
     }
   };
 useEffect(() => {
@@ -62,6 +61,7 @@ useEffect(() => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </fieldset>
+          {error && <p className="text-error">{error}</p>}
           <div className="card-actions justify-center">
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
