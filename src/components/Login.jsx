@@ -9,8 +9,8 @@ const Login = () => {
   const user = useSelector((state)=> state.user);
   console.log(user)
   const dispatch = useDispatch();
-  const [email, setEmailId] = useState("vinod@gmail.com");
-  const [password, setPassword] = useState("Vinod@123");
+  const [email, setEmailId] = useState("steve@gmail.com");
+  const [password, setPassword] = useState("Steve@123");
   const [error,setError] = useState('');
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -31,7 +31,6 @@ const Login = () => {
   };
 useEffect(() => {
   if (user && user?.user?._id) {
-    console.log('Navigating because user exists', user);
     navigate('/');
   }
 }, [user]);
