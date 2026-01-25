@@ -30,9 +30,12 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen grid grid-rows-[auto_1fr_auto]">
       <Navbar />
+      <main className="px-6 py-10">
       <Outlet />
+      </main>
+
       <Footer />
     </div>
   );
