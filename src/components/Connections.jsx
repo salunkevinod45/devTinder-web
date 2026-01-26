@@ -18,7 +18,6 @@ const Connections = () => {
       const connections = await axios.get(BASE_URL + "user/connections", {
         withCredentials: true,
       });
-      console.log(connections.data.data);
       dispatch(addConnections(connections.data.data));
     } catch (error) {
       console.log(error);
@@ -89,7 +88,7 @@ const Connections = () => {
               } = connection.user;
               const { connectionId } = connection;
               return (
-                <div className="card bg-base-100 w-96 shadow-sm">
+                <div key={connectionId} className="card bg-base-100 w-96 shadow-sm">
                   <figure>
                     <img src={photoUrl} alt="Shoes" />
                   </figure>
