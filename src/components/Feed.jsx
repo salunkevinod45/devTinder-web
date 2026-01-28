@@ -14,6 +14,7 @@ const Feed = () => {
         withCredentials: true,
       });
       dispatch(addFeed(feeds.data.data));
+
     } catch (error) {
       console.log(error);
     }
@@ -21,11 +22,15 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+
+if(feed.feed.length === 0){
+  return <div>No feed available</div>
+}
   return (
-    feed[0] &&
+    feed.feed[0] &&
     <div className="grid justify-center">
       <div className="grid grid-cols-1 my-10">
-        <UserCard user={feed[0]}/>
+        <UserCard user={feed.feed[0]}/>
       </div>
     </div>
   );

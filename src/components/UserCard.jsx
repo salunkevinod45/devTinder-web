@@ -1,12 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user }) => {
   const { firstName, lastName, photoUrl, gender, age, about, skills, _id } =
     user;
   const [responseMessage, setResponseMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const dispatch = useDispatch();
 
   const sendRequest = async (status) => {
    setErrorMessage(null)
@@ -20,10 +24,16 @@ const UserCard = ({ user }) => {
       setTimeout(() => {
         responseMessage(null);
       }, 3000);
+
+      dispatch(removeFeed(_id));
     } catch (error) {
       setErrorMessage(error.response.data)
     }
   };
+
+  if(!user) {
+    return <div>No feed available</div>
+  }
   return (
     <div className="">
       {responseMessage && (
