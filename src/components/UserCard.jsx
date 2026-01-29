@@ -22,7 +22,7 @@ const UserCard = ({ user }) => {
       );
       setResponseMessage(sendInterest.data);
       setTimeout(() => {
-        responseMessage(null);
+        setResponseMessage(null);
       }, 3000);
 
       dispatch(removeFeed(_id));

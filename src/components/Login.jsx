@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const user = useSelector((state)=> state.user);
   console.log(user)
   const dispatch = useDispatch();
-  const [email, setEmailId] = useState("steve@gmail.com");
-  const [password, setPassword] = useState("Steve@123");
+  const [email, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
   const [error,setError] = useState('');
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -65,6 +65,10 @@ useEffect(() => {
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
             </button>
+               <Link to={"/signup"}><button className="btn btn-primary">
+              Sign up
+            </button>
+            </Link>
           </div>
         </div>
       </div>
