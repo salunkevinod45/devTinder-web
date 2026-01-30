@@ -25,7 +25,6 @@ const Signup = () => {
       const user = await axios.post(`${BASE_URL}signup`, signupForm, {
         withCredentials: true,
       });
-      console.log(user);
       if (user) {
         dispatch(addUser(user.data.data));
         navigate("/profile");
@@ -89,7 +88,7 @@ const Signup = () => {
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Password</legend>
             <input
-              type="text"
+              type="password"
               className="input"
               id="password"
               value={signupForm.password}
