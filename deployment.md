@@ -1,0 +1,17 @@
+
+- Sign in to aws console
+- create ec2 instance 
+- create key value pair as pem key while creating a ec2 instance 
+- connect to ec2 instance
+- install node version
+- git clone 
+- Frontend
+   - npm install -> dependencies install
+   - npm run build 
+   - sudo apt update
+   - sudo apt install nginx
+   - sudo systemctl start nginx
+   - sudo systemctl enable nginx
+   - copy code from dist(build files) to /var/www/html
+   - sudo scp -r dist/* /var/www/html
+   - Enable port :80 for aws instance
