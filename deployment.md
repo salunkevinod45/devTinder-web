@@ -51,3 +51,72 @@
     sudo systemctl restart nginx
    - modify the BASEURL in frontend project to "/api/"
 
+#Adding a custom Domain name
+
+- purchase domain name fro godaddy 
+- signup on cloudflare and add a new domain name
+- change the nameservers on godaddy and point it to cloudflare
+- Wait for sometime till your nameserver will updated ~ approximately it will take 15 mins
+- DNS record : A vinodsalunke.com
+- Enable SSL certificate 
+- cluodflare.com -> dashboard > SSL/TLS -> Overview -> configure  -> custom SSL/TLS -> select flexible -> save
+
+
+#Send an email using Amazon SES(Simple Email Service)
+
+- Login into Amazon aws console
+- Search IAM 
+- Go to IAM
+- Create a new user
+   - Enter user name which you want to create 
+   - Click next
+   - Select 'Attach policy direct' as Permission options
+   - Search 'amazon ses' as permission polices and select 'AmazonSESFullAccess' and click next
+   - In the last step just click on create user
+
+- Search for 'Simple Email Service' from amazon aws dashboard and you will land into 'account dashboard'
+- Click on 'View Get set up page'
+- Click on 'create identity'
+= Select identity type as Domain 
+- Enter Domain name as vinodsalunke.com
+- In advancesDKIM settings , select 'Easy DKIM' and DKIM Signing key length equal to 'RSA_2048_BIT'
+- Click on create identity
+- After this you will see DNS records and that DNS records you need to add it in cludflare.com for vinodsalunke.com domain
+- Go to cloudflare.com
+- Go to vinodsalunke.com domain
+- click on DNS->Records from left menu
+- Add those DNS records as type CNAME in cloudflare and toggle off proxy status (Repeat this step for all DNS records which you get from Amazon SES)
+- Wait for sometime to verify those DNS records by Amazon SES(Simple Email Service)
+- After verification is completed . then click on 'Get set up'
+- Click on 'Request production access'
+- Select Mail type as 'Transactional'
+- Enter website URL as 'https://vinodsalunke.com/'
+- Enter additional contact email -> add 'salunkevinod45@gmail.com'
+- check the terms 
+- Submit the request
+
+#Get secret key for IAM user 
+
+- Go to IAM
+- click on users
+- select the user name which you have created
+- go to 'Security credentials'
+- click on 'create access key' under 'access key'
+- select 'other' as use case
+- click next 
+- click on 'create access key'
+- now you will get secret access key and access key 
+- copy those secret access key and access key on your local machine
+
+#Node Js code setup 
+
+- Install AWS SDK - v3
+- Code Example - https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/ses-examples-sending-email.html
+
+
+
+
+
+
+
+
