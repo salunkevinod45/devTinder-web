@@ -114,6 +114,17 @@
 - Code Example - https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/ses-examples-sending-email.html
 
 
+#Razorpay Integration 
+
+- create a razorpay account 
+- store razorpay credentials (secret key and access key)
+- install razorpay node js package to backend project 
+- create an api to store order to razorpay
+- from frontend call create an order api based on type of subscription (gold or silver)
+- once the order is created then open a checkout dialog box from frontend (call the razorpay open dialog box)
+- Integrate web hook implementation in backend project 
+  - create new endpoint which will inform backend about the status of payment and based on that payment update the order details like status in mongodb.
+
 
 
 

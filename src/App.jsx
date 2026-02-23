@@ -9,6 +9,7 @@ import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import Signup from "./components/Signup";
+import premium from "./components/premium";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,7 @@ function App() {
         { path: "/connections", Component: Connections },
         { path: "/requests", Component: Requests },
         { path: "/signup", Component: Signup },
+        { path:"/premium", Component:premium}
       ],
     },
   ]);
