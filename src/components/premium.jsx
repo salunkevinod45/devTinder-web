@@ -28,9 +28,7 @@ const Premium = () => {
       "memberShipType":plan
     }
       const orderData = await axios.post(`${BASE_URL}payments/create-order`, payload ,{ withCredentials: true });
-      console.log(orderData.data)
       const {amount,currency,razorpayOrderId,keyId,name,email} = orderData.data.order;
-      console.log(plan)
 
         // Open Razorpay Checkout
       const options = {
@@ -48,8 +46,7 @@ const Premium = () => {
         theme: {
           color: '#F37254'
         },
-        handler: (res)=> {
-          console.log('razorpay res ',res);
+        handler: ()=> {
           // After successful payment, check premium status again to update UI
           checkPremiumStatus();
         }
