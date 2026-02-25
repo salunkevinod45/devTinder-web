@@ -1,8 +1,23 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BASE_URL } from '../utils/constants';
 
-const premium = () => {
+const Premium = () => {
+
+  const [isPremiumUser, setIsPremiumUser] = useState(false);
+
+  const checkPremiumStatus = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}payments/check-is-premium-user`, { withCredentials: true });
+      setIsPremiumUser(response.data.isPremium);
+    } catch (error) {
+      console.error('Error checking premium status:', error);
+    }
+  };
+
+  useEffect(() => {
+    checkPremiumStatus();
+  }, []);
 
   const handleBuy = async(plan) => {
     try {
@@ -33,6 +48,11 @@ const premium = () => {
         theme: {
           color: '#F37254'
         },
+        handler: (res)=> {
+          console.log('razorpay res ',res);
+          // After successful payment, check premium status again to update UI
+          checkPremiumStatus();
+        }
       };
 
       const rzp = new window.Razorpay(options);
@@ -44,10 +64,18 @@ const premium = () => {
   }
 
   return (
+    isPremiumUser ? (
+      <div className="bg-base-200 min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">Thank You for Upgrading!</h1>
+          <p className="text-lg text-gray-600">
+            You are now a premium member. Enjoy all the exclusive features and benefits!
+          </p>
+        </div>
+      </div>
+    ) :
     <>
        <div className="bg-base-200 min-h-screen">
-
-   
 
       {/* Hero Section */}
       <section className="text-center py-16 px-4">
@@ -184,4 +212,4 @@ const premium = () => {
   )
 }
 
-export default premium
+export default Premium
